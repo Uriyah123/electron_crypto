@@ -1,0 +1,141 @@
+<html>
+
+<head>
+  <title>Crypto</title>
+  <p id="btcusd"> Current value of Bitcoin in USD: </p>
+  <p id="ethusd"> Current value of Ethereum in USD: </p>
+  <p id="dgcusd"> Current value of Dogecoin in USD: </p>
+  <!--<button onclick="getApi()">Refresh</button> -->
+  <style>
+    *{
+      align-content: center;
+      align-items: center;
+      font-family: arial;
+      font-size: 52px;
+    }
+    /* button {
+  background-color: #5b5e5b; /* Green */
+  /* border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer; */
+/* } */ */
+
+/* button {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #5b5e5b;
+}
+
+button:hover {
+  background-color: #3c3d3c;
+  color: white;
+} */
+
+
+    p {
+      color: #4b4949;
+      align-content: center;
+      font-size: 20px;
+    }
+  </style>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // google.charts.load('current', { 'packages': ['line'] });
+    // google.charts.setOnLoadCallback(drawChart);
+    function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+     }
+    async function getApi() {
+      for(let i = 0; i < Infinity; i++)
+      {
+      await fetch('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD').then(async (response) => {
+        let result = await response.json()
+        document.getElementById("btcusd").innerHTML = "Current value of Bitcoin in USD: " + result["USD"] + "$"
+      })
+      await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD').then(async (response) => {
+        let result = await response.json()
+        document.getElementById("ethusd").innerHTML = "Current value of Ethereum in USD: " + result["USD"] + "$"
+      })
+      await fetch('https://min-api.cryptocompare.com/data/price?fsym=DGC&tsyms=USD').then(async (response) => {
+        let result = await response.json()
+        document.getElementById("dgcusd").innerHTML = "Current value of Dogecoin in USD: " + result["USD"] + "$"
+      })
+      await sleep(1000);
+      console.log("update number: " + i);
+      }
+      }
+
+    getApi();
+    /*
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'value in USD');
+      data.addColumn('number', 'BTC');
+      data.addColumn('number', 'ETH ');
+      data.addColumn('number', 'DGC ');
+
+      data.addRows([
+        [new Date(1900, 1, 1).getTime(), 37.8, 80.8, 41.8, 1],
+        [new Date(1800, 1, 2).getTime(), 30.9, 69.5, 32.4, 1]
+        /*  [3,  25.4, 57, 25.7,1],
+          [4,  11.7, 18.8, 10.5,1],
+          [5,  11.9, 17.6, 10.4,1],
+          [6,   8.8, 13.6,  7.7,1],
+          [7,   7.6, 32.3,  9.6,1],
+          [8,  12.3, 29.2, 10.6,1],
+          [9,  16.9, 42.9, 14.8,1],
+          [10, 12.8, 30.9, 11.6,1],
+          [11,  5.3,  7.9,  4.7,1],
+          [12,  6.6,  8.4,  5.2,1],
+          [13,  4.8,  6.3,  3.6,1],
+          [14,  4.2,  6.2,  3.4,1],
+          [15,  4.2,  9.2,  5.4,1],
+          [16,  5.2,  7.2,  9.4, 9],
+          [17,  7.2,  8.2,  10.4, 2],
+          [18,  8.2,  6.2,  3.4, 5],
+           [19,  9.2,  7.2,  3.4, 3],
+           [20,  10.2,  9.2,  3.4,1],
+          [21,  11.2,  10.2,  3.4,1],
+          [22, 12.2,  11.2,  3.4,1],
+          [23,  13.2,  12.2,  3.4,1],
+  */
+     // ]);
+
+    //  /* var options = {
+    //     chart: {
+    //       title: 'Crypto currency value history',
+    //       subtitle: 'in dollars (USD)'
+    //     },
+    //     width: 1600,
+    //     height: 600,
+    //     axes: {
+    //       x: {
+    //         0: { side: 'top' }
+    //       }
+    //     }
+    //   };
+
+    //   var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+    //   chart.draw(data, google.charts.Line.convertOptions(options));
+    // */
+    
+    // }
+    
+  </script>
+</head>
+
+<body>
+  <div id="line_top_x"></div>
+</body>
+
+</html>
